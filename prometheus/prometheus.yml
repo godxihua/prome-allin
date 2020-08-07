@@ -1,0 +1,55 @@
+# my global config
+global:
+  scrape_interval:     30s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ["alertmanager:9093"]
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+    - "/prometheus/rules/*.yml"
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+    static_configs:
+    - targets: ['prometheus:9090']
+  - job_name: 'docker'
+    static_configs:
+    - targets: ['cadvisor:8080']
+  - job_name: 'beta_mariadb'
+    static_configs:
+    - targets: ['192.168.2.141:9104']
+  - job_name: 'node-exporter'
+    static_configs:
+    - targets: ['node-exporter:9100']
+  - job_name: 'http_status'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    file_sd_configs:
+      - files: 
+        - /file_sd/*.json
+        refresh_interval: 10s
+    static_configs:
+      - targets: ['https://otc-api-hk.eiijo.cn/v1/data/trade-market?country=37&currency=1&payMethod=0&currPage=1&blockType=general&online=1&coinId=2&tradeType=sell','https://otc-api-hk.eiijo.cn/v1/data/trade-market?country=37&currency=1&payMethod=0&currPage=1&blockType=general&online=1&coinId=2&tradeType=buy','https://otc-api.eiijo.cn/v1/data/trade-market?coinId=2&currency=1&tradeType=sell&currPage=1&payMethod=0&country=37&blockType=block&online=1&range=0&amount=','https://lfsx.link','https://www.lfsx.link','https://w2.lfsx.link','https://y2.lfsx.link']
+        labels:
+          group: "api"
+      - targets: ['https://vbit.one','https://www.vbit.one','https://w2.vbit.one','https://y2.vbit.one','https://cmex.life','https://www.cmex.life','https://w2.cmex.life','https://y2.cmex.life','https://bmex.vip','https://www.bmex.vip','https://w2.bmex.vip','https://y2.bmex.vip','https://amberex.pro','https://www.amberex.pro','https://w2.amberex.pro','https://y2.amberex.pro','https://xmex.co','https://www.xmex.co','https://w2.xmex.co','https://y2.xmex.co','https://ooex.one','https://www.ooex.one','https://w2.ooex.one','https://y2.ooex.one','https://gmex.me','https://www.gmex.me','https://w2.gmex.me','https://y2.gmex.me','https://xstar.io','https://www.xstar.io','https://w2.xstar.io','https://y2.xstar.io','https://wjex.pro','https://www.wjex.pro','https://w2.wjex.pro','https://y2.wjex.pro','https://bseedex.com','https://www.bseedex.com','https://w2.bseedex.com','https://y2.bseedex.com','https://boexpro.com','https://www.boexpro.com','https://w2.boexpro.com','https://y2.boexpro.com','https://bmaclub.com','https://www.bmaclub.com','https://w2.bmaclub.com','https://y2.bmaclub.com','https://starbit.vip','https://www.starbit.vip','https://w2.starbit.vip','https://y2.starbit.vip','https://umex.co','https://www.umex.co','https://w2.umex.co','https://y2.umex.co','https://bettercoin.vip','https://www.bettercoin.vip','https://w2.bettercoin.vip','https://y2.bettercoin.vip','https://cointobe.link','https://www.cointobe.link','https://w2.cointobe.link','https://y2.cointobe.link','https://kingdomex.net','https://www.kingdomex.net','https://w2.kingdomex.net','https://y2.kingdomex.net','https://kmex.io','https://www.kmex.io','https://w2.kmex.io','https://y2.kmex.io','https://rockbit.info','https://www.rockbit.info','https://w2.rockbit.info','https://y2.rockbit.info','https://wjex.one','https://www.wjex.one','https://w2.wjex.one','https://y2.wjex.one','https://www.amberex.pro','https://w2.amberex.pro','https://y2.amberex.pro','https://xmex.co','https://www.xmex.co','https://w2.xmex.co','https://y2.xmex.co','https://ooex.one','https://www.ooex.one','https://w2.ooex.one','https://y2.ooex.one','https://gmex.me','https://www.gmex.me','https://w2.gmex.me','https://y2.gmex.me','https://xstar.io','https://www.xstar.io','https://w2.xstar.io','https://y2.xstar.io','https://wjex.pro','https://www.wjex.pro','https://w2.wjex.pro','https://y2.wjex.pro','https://bseedex.com','https://www.bseedex.com','https://w2.bseedex.com','https://y2.bseedex.com','https://boexpro.com','https://www.boexpro.com','https://w2.boexpro.com','https://y2.boexpro.com']
+        labels:
+          group: "website"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115

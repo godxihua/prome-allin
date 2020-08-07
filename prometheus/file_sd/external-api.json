@@ -1,0 +1,149 @@
+[ 
+ 	{
+ 	"targets": ["https://fg.gmex.me:8000/getuidwall11?uid=2090977&coin=BTC"],
+     	"labels": {
+      		"group": "BTC",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["http://18.179.34.47:50999/q/daily_stm/GAEA"],
+     	"labels": {
+      		"group": "stm-GAEA",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["http://18.179.34.47:50999/q/daily_trd/GAEA"],
+     	"labels": {
+      		"group": "trd",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["http://trd.gaea-ex.net/sms/telhttp"],
+     	"labels": {
+      		"group": "sms",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://adm-d.gdoex.com","https://hehuoren.im/api/adm/"],
+     	"labels": {
+      		"group": "cc",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://fg.gmex.me:8000"],
+     	"labels": {
+      		"group": "fgmex",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://ucs-web.gmex.me/"],
+     	"labels": {
+      		"group": "ucs",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://www.gmex.me/api/game_greedy"],
+     	"labels": {
+      		"group": "gamegreedy",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://www.gmex.me/api/kuaixun"],
+     	"labels": {
+      		"group": "gmexkx",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://www.gmex.me/api/pay"],
+     	"labels": {
+      		"group": "PAY",
+      		"func": "external-api"
+      		}
+     },
+	{
+	"targets": ["https://www.gmex.me/daydayCoinDlg"],
+     	"labels": {
+      		"group": "ddCoin",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://www.gmex.me/v1/api-dmp/"],
+     	"labels": {
+      		"group": "api-dmp",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://www.gmex.me/v1/otc/hello"],
+     	"labels": {
+      		"group": "otc",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://www.gmex.me/v1/rest/GetTick?sym=MYT/USDT@15"],
+     	"labels": {
+      		"group": "xymarket",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://www.gmex.me/wd/"],
+     	"labels": {
+      		"group": "wd",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://www.gmex.me/www/"],
+     	"labels": {
+      		"group": "xj-ww",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://ucs-web.gmex.me/gaea/transfer"],
+     	"labels": {
+      		"group": "xk-info",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://www.gmex.me/www/mb/v1/users/info"],
+     	"labels": {
+      		"group": "gmex-info",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["https://www.gmex.me/www/v1/users/refreshToken"],
+     	"labels": {
+      		"group": "gmex-user-Token",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["http://bjmtn.b2m.cn/"],
+     	"labels": {
+      		"group": "SMS_b2m",
+      		"func": "external-api"
+      		}
+     },
+  	{
+	"targets": ["http://api.sendcloud.net/apiv2/mail/send/unknown"],
+     	"labels": {
+      		"group": "Email_sendcloud",
+      		"func": "external-api"
+      		}
+     }
+]

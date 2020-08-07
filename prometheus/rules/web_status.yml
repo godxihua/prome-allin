@@ -1,0 +1,12 @@
+groups:
+- name: http_status
+  rules:
+  - alert: web status
+    expr: (probe_success{group="website"} or probe_success{instance=~"https://otc-api.*"}) !=1
+    for: 1m
+    labels:
+      severity: "critical"
+    annotations:
+      summary: "{{$labels.instance}} out of service!"
+      description: "Url: {{$labels.instance}} out of service more than 1 minutes!"
+      

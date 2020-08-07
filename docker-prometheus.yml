@@ -1,0 +1,86 @@
+version: '3'
+
+services:
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    tty: true
+    restart: always
+    expose:
+      - "9090"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/data:/prometheus
+      - ./prometheus/file_sd:/file_sd
+      - ./prometheus/rules:/prometheus/rules
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    environment:
+      - ulimit nofile=262144:262144
+      - privileged
+    links:
+      - alertmanager
+      - blackbox
+      - dingtalk
+      - cadvisor
+  node-exporter:
+    container_name: node-exporter
+    image: quay.io/prometheus/node-exporter
+    tty: true
+    restart: always
+    volumes:
+      - /:/host:ro,rslave
+    environment:
+      - ulimit nofile=262144:262144
+      - net="host"
+      - pid="host"
+      - path.rootfs=/host
+  alertmanager:
+    container_name: alertmanager
+    image: quay.io/prometheus/alertmanager
+    tty: true
+    restart: always
+    expose:
+      - "9093"
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    environment:
+      - ulimit nofile=262144:262144
+    links:
+      - dingtalk
+  blackbox:
+    container_name: blackbox
+    image: prom/blackbox-exporter:master
+    restart: always
+    expose:
+      - "9115"
+    volumes:
+      - ./blackbox_exporter/blackbox.yml:/etc/blackbox_exporter/config.yml
+    environment:
+      - ulimit nofile=262144:262144
+  dingtalk:
+    container_name: dingtalk
+    image: timonwong/prometheus-webhook-dingtalk
+    restart: always
+    expose:
+      - "8060"
+    volumes:
+      - ./dingtalk/config.yml:/etc/prometheus-webhook-dingtalk/config.yml
+    environment:
+      - ulimit nofile=262144:262144
+  cadvisor:
+    container_name: cadvisor
+    image: google/cadvisor
+    restart: always
+    expose:
+      - "8080"
+#    ports:
+#      - "8090:8080"
+    volumes:
+      - /:/footfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    environment:
+      - ulimit nofile=262144:262144

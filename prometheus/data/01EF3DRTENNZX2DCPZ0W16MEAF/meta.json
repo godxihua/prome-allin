@@ -1,0 +1,17 @@
+{
+	"ulid": "01EF3DRTENNZX2DCPZ0W16MEAF",
+	"minTime": 1596758400000,
+	"maxTime": 1596765600000,
+	"stats": {
+		"numSamples": 1568676,
+		"numSeries": 6540,
+		"numChunks": 13076
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01EF3DRTENNZX2DCPZ0W16MEAF"
+		]
+	},
+	"version": 1
+}

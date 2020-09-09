@@ -13,6 +13,7 @@ services:
     volumes:
       - ./prometheus/data:/prometheus
       - ./prometheus/file_sd:/file_sd
+      - ./prometheus/node_file_sd:/node_file_sd
       - ./prometheus/rules:/prometheus/rules
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     environment:
